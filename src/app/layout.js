@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
               className="m-1 text-emerald-500 hover:text-emerald-700"
               href="/HomePage"
             >
-              About
+              {/* About */}
             </Link>
           </nav>
         </header>
