@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
               className="m-1 text-emerald-500 hover:text-emerald-700"
               href="/Management"
             >
-              Manage Library
+              Manage 
             </Link>
             <Link
               className="m-1 text-emerald-500 hover:text-emerald-700"

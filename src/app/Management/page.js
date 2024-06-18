@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Dropdown from './Dropdown';
 
 export default function ManagementPage() {
   const [chores, setChores] = useState([]); // Array to store chores
@@ -43,6 +44,11 @@ export default function ManagementPage() {
           <label htmlFor="choreType" className="text-sm font-medium text-gray-700 mb-2">
             Chore Type:
           </label>
+          <Dropdown
+            options={choreTypeOptions}
+            value={newChoreType}
+            onChange={handleNewChoreTypeChange}
+          />
           <select
             id="choreType"
             name="choreType"
@@ -57,8 +63,11 @@ export default function ManagementPage() {
                     {newChoreType === 'laundry' && (
                       <div className="flex flex-col mt-2">
                         <label htmlFor="laundryDetails" className="text-sm font-medium text-gray-700 mb-2">
-                          Laundry Details (Optional):
+                          Laundry Details (Optional): 
+                          
                         </label>
+                        
+
                         <textarea
                           id="laundryDetails"
                           name="laundryDetails"
