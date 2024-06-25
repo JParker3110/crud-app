@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getAllDocuments, addDocument } from '../utils/firebaseUtils';
+import { db } from '../../../firebase.config';
 
 
 export default function ManagementPage() {
@@ -12,12 +14,39 @@ export default function ManagementPage() {
   const handleAddChore = (e) => {
     e.preventDefault(); // Prevent default form submission
 
+    useEffect(() => {
+      async function fetchData() {
+        // try to get all documents, if you cant, catch the error
+        try {
+          const documents = await getAllDocuments(db, "chores");
+          const choreInstances = documents.map((doc) => {
+            return new chores(doc.chore1, doc.chore2);
+          });
+          setChores(new chores(library.name, choreInstances));
+        } catch (error) {
+          console.log("Failed fetching data", error);
+        }
+      }
+  
+      fetchData();
+      return () => {
+        console.log("get all docs cleanup");
+      };
+    }, []);
+    
+
     const newChore = {
       id: Date.now(),
       type: newChoreType,
       details: newChoreDetails,
       completed: false,
     };
+
+    addDocument(db, "chores", {
+      chore1: e.target.chore1.value,
+      chore2: parseInt(e.target.chore2.value),
+    });
+
     setChores([...chores, newChore]);
     setNewChoreDetails(''); // Clear details after adding laundry chore
   };
