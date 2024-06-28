@@ -1,54 +1,8 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { getAllDocuments, addDocument } from '../utils/firebaseUtils';
+import { getAllDocuments, addDocument, deleteDocument } from '../utils/firebaseUtils';
 import { db } from '../../../firebase.config';
 
-
-
-
-// export default function ManagementPage() {
-//   const [chores, setChores] = useState([]); // Array to store chores
-//   const [newChoreType, setNewChoreType] = useState('dishes'); // Default to dishes
-//   const [newChoreDetails, setNewChoreDetails] = useState(''); // Optional details for laundry
-
-
-
-//   // ... (functions to handle CRUD operations)
-
-//   const handleAddChore = (e) => {
-//     e.preventDefault(); // Prevent default form submission
-
-   
-    
-
-//     const newChore = {
-//       id: Date.now(),
-//       type: newChoreType,
-//       details: newChoreDetails,
-//       completed: false,
-//     };
-
-//     addDocument(db, "chores", {
-//       chore1: e.target.chore1.value,
-//       chore2: parseInt(e.target.chore2.value),
-//     });
-
-//     setChores([...chores, newChore]);
-//     setNewChoreDetails(''); // Clear details after adding laundry chore
-//   };
-
-//   const handleDeleteChore = (choreId) => {
-//     // Update state to remove the chore with matching ID
-//     setChores(chores.filter((chore) => chore.id !== choreId));
-//   };
-
-//   const handleMarkComplete = (choreId) => {
-//     setChores(
-//       chores.map((chore) =>
-//         chore.id === choreId ? { ...chore, completed: !chore.completed } : chore
-//       )
-//     );
-//   };
 
 export default function ManagementPage() {
   const [chores, setChores] = useState([]);
@@ -95,6 +49,8 @@ export default function ManagementPage() {
     addChore(newChore, newChore === 'laundry' ? newChoreDetails : '');
   };
   return (
+
+
 <div className="container mx-auto px-6 py-9 bg-purple-700">
       <center><h1>Manage Chores</h1></center>
       <div className="flex flex-col my-6 text-white">
