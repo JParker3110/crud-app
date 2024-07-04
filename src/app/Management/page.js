@@ -1,14 +1,16 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { getAllDocuments, addDocument, deleteDocument } from '../utils/firebaseUtils';
+import { getAllDocuments, addDocument, deleteDocument } from '../../utils/firebaseUtils';
 import { db } from '../../../firebase.config';
-
+import AddChoreForm from '../../components/AddChoreForm';
+import RegisterForm from '../../components/RegisterForm';
+import LoginForm from '../../components/LoginForm';
+import LogoutButton from '../../components/LogoutButton';
 
 export default function ManagementPage() {
   const [chores, setChores] = useState([]);
   const [newChore, setNewChore] = useState('');
   const [newChoreDetails, setNewChoreDetails] = useState('');
-
   useEffect(() => {
     async function fetchData() {
       // try to get all documents, if you cant, catch the error
@@ -22,13 +24,11 @@ export default function ManagementPage() {
         console.log("Failed fetching data", error);
       }
     }
-  
     fetchData();
     return () => {
       console.log("get all docs cleanup");
     };
   }, []);
-
   const addChore = (type, details = '') => {
     setChores([...chores, { id: Date.now(), type, details, completed: false }]);
     setNewChore('');
@@ -49,14 +49,16 @@ export default function ManagementPage() {
     addChore(newChore, newChore === 'laundry' ? newChoreDetails : '');
   };
   return (
-
-
 <div className="container mx-auto px-6 py-9 bg-purple-700">
       <center><h1>Manage Chores</h1></center>
       <div className="flex flex-col my-6 text-white">
       <h2>CHORES TO BE COMPLETED</h2>
+      <LogoutButton />
+      <RegisterForm />
+      <LoginForm />
       </div>
-      <form onSubmit={handleAddChore}>
+      <AddChoreForm handleAddChore={handleAddChore}/>
+      {/* <form onSubmit={handleAddChore}>
         <div className="flex flex-col my-5 text-black">
           <label htmlFor="newChore">Chore:</label>
           <input
@@ -79,7 +81,7 @@ export default function ManagementPage() {
           </div>
         )}
         <button type="submit text-black">Add Chore</button>
-      </form>
+      </form> */}
       <div className="flex flex-col my-6 text-yellow-500">
       <h2>Existing Chores</h2>
       </div>
@@ -118,6 +120,3 @@ export default function ManagementPage() {
     </div>
   );
 }
-
-  
-  
