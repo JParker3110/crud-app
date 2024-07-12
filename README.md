@@ -50,4 +50,4 @@ This application is deployed on Vercel. You can view the live site at: [https://
 To run the unit tests, use the following command:
 
 ```bash
-npm run test
+npm run test 

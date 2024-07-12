@@ -9,7 +9,7 @@ export default function Home() {
         </meta>
       </head>
     <h1 className="my-12 text-6xl text-center">CRUD APP</h1>
-    <p>Created by: Janiece Parker</p>
+    <p>Created by: Janiece N Parker</p>
   </main>
   );
 }
